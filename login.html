@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SILAPU Kopma UIN RIL</title>
+    <style>
+        :root {
+            --light-green: #8CD790;
+            --dark-green: #5CAB7D;
+            --red: #E74C3C;
+            --yellow: #F1C40F;
+            --white: #FFFFFF;
+            --dark: #333333;
+            --light-gray: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--light-green);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img { 
+            height: 50px;
+            width: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .logo h1 {
+            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        /* Auth Container */
+        .auth-container {
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .auth-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+        
+        .auth-tab:hover {
+            color: var(--light-green);
+            transform: scale(1.1);
+            border-bottom: 2px solid var(--light-green);
+        }
+        
+        .auth-tab.active {
+            color: var(--dark-green);
+            border-bottom: 2px solid var(--dark-green);
+            margin-bottom: -2px;
+            animation: underlineExpand 0.3s ease forwards;
+        }
+
+        @keyframes underlineExpand {
+            from {
+                border-bottom-width: 0;
+                opacity: 0;
+            }
+            to {
+                border-bottom-width: 2px;
+                opacity: 1;
+            }
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--dark-green);
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--dark-green);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--light-green);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        
+        .form-footer a {
+            color: var(--dark-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+        
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .auth-container {
+                margin: 20px auto;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="./logokopma.jpg" alt="Logo Kopma">
+                    <h1>SILAPU Kopma UIN RIL</h1>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Signup Title Section -->
+    <div class="container" style="text-align: center; margin: 30px auto;">
+        <h2 style="color: var(--dark-green); margin-bottom: 10px;">- Buat Akun -</h2>
+        <p style="color: var(--dark);">Halo coopers! Belum punya akun? Langsung saja daftar jadi bagian dari keluarga kopma</p>
+    </div>
+
+    <!-- Auth Container -->
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchTab('login')">Login</div>
+                <div class="auth-tab" onclick="switchTab('signup')">Daftar</div>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active" method="POST" action="login.php">
+                <div class="form-group">
+                    <label for="login-email">Email atau Username</label>
+                    <input type="text" class="form-control" id="login-email" name="emailOrUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" class="form-control" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <a href="#index.html"></a>
+                <div class="form-footer">
+                    Lupa password? <a href="#">Reset disini</a>
+                </div>
+            </form>
+            
+            <!-- Signup Form -->
+            <form id="signup-form" class="auth-form" method="POST" action="register.php">
+                <div class="form-group">
+                    <label for="signup-name">Nama Lengkap</label>
+                    <input type="text" class="form-control" id="signup-name" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" class="form-control" id="signup-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" class="form-control" id="signup-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Konfirmasi Password</label>
+                    <input type="password" class="form-control" id="signup-confirm" name="confirm_password" required>
+                </div>
+                <button type="submit" class="btn">Daftar</button>
+                <a href="#login.html"></a>
+                <div class="form-footer">
+                    Sudah punya akun? <a href="#login.html" onclick="switchTab('login')">Login disini</a>
+                </div>
+            </form>
+            <div id="notification" style="display:none; margin-top: 10px; color: green; font-weight: 600; text-align: center;"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="copyright">&copy; 2025 SILAPU Kopma UIN Raden Intan Lampung. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabName, event) {
+            // Hide all forms
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            
+            // Show selected form
+            document.getElementById(tabName + '-form').classList.add('active');
+            
+            // Update active tab
+            document.querySelectorAll('.auth-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+
+        // Redirect to beranda (silapu.html) after login form submission for demo
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            var usernameInput = document.getElementById('login-email').value.trim();
+            if (usernameInput.toLowerCase() === 'admin') {
+                event.preventDefault();
+                localStorage.setItem('loggedIn', 'true');
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                event.preventDefault();
+                localStorage.setItem('loggedIn', 'true');
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Show notification and switch to login tab after signup form submission
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Show notification
+            const notification = document.getElementById('notification');
+            notification.textContent = 'Pendaftaran berhasil!';
+            notification.style.display = 'block';
+            // Switch to login tab
+            switchTab('login', { currentTarget: document.querySelector('.auth-tab') });
+        });
+    </script>
+</body>
+</html>

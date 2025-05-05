@@ -1,0 +1,210 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Keranjang - SILAPU Kopma UIN RIL</title>
+    <style>
+        :root {
+            --light-green: #8CD790;
+            --dark-green: #5CAB7D;
+            --red: #E74C3C;
+            --yellow: #F1C40F;
+            --white: #FFFFFF;
+            --dark: #333333;
+            --light-gray: #F5F5F5;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark);
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--light-green);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 50px;
+            width: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .logo h1 {
+            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .nav-links a:hover {
+            color: var(--white);
+            background-color: var(--dark-green);
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background-color: var(--light-green);
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+        }
+        
+        main.content {
+            margin-top: 40px;
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: var(--light-green);
+            color: var(--dark);
+        }
+        tr:hover {
+            background-color: var(--light-gray);
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--red);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="./logokopma.jpg" alt="Logo Kopma">
+                    <h1>SILAPU Kopma UIN RIL</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html#beranda">Beranda</a>
+                    <a href="index.html#layanan">Layanan</a>
+                    <a href="index.html#tentang">Tentang Kami</a>
+                    <a href="index.html#berita">Berita</a>
+                    <a href="index.html#kontak">Kontak</a>
+                    </div>
+                <button class="hamburger">☰</button>
+            </nav>
+        </div>
+    </header>
+    <main class="content">
+        <h2>Keranjang Pesanan</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama Produk/Jasa</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <tr>
+                    <td><a href="payment.html">Kerajinan Tangan Anyaman Bambu</a></td>
+                    <td>Rp 50.000</td>
+                    <td>1</td>
+                    <td><button class="btn" onclick="checkout()">Checkout</button></td>
+                </tr>
+                <tr>
+                    <td><a href="payment.html">Kue Kering Lebaran</a></td>
+                    <td>Rp 25.000</td>
+                    <td>2</td>
+                    <td><button class="btn" onclick="checkout()">Checkout</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <script>
+        function checkout() {
+            alert('Melanjutkan ke halaman pembayaran.');
+            window.location.href = 'payment.html';
+        }
+    </script>
+</body>
+</html>

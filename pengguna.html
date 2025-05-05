@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pengguna - Admin SILAPU Kopma UIN RIL</title>
+    <style>
+        :root {
+            --light-green: #8CD790;
+            --dark-green: #5CAB7D;
+            --red: #E74C3C;
+            --yellow: #F1C40F;
+            --white: #FFFFFF;
+            --dark: #333333;
+            --light-gray: #F5F5F5;
+            --sidebar-width: 250px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--dark);
+        }
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--dark-green);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+        }
+        .sidebar h2 {
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        .sidebar nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 15px;
+            display: block;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            background-color: var(--yellow);
+            color: var(--dark-green);
+        }
+        /* Main content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            flex-grow: 1;
+            background-color: var(--white);
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        header {
+            background-color: var(--light-green);
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: var(--sidebar-width);
+            right: 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            z-index: 100;
+        }
+        header h1 {
+            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .main-content-inner {
+            padding-top: 80px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid var(--dark-green);
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--dark-green);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <nav>
+            <a href="admin-dashboard.html">Dashboard Utama</a>
+            <a href="kelola-usaha.html">Kelola Usaha</a>
+            <a href="pemesanan.html">Pemesanan</a>
+            <a href="pengguna.html" class="active">Pengguna</a>
+            <a href="laporan.html">Laporan</a>
+            <a href="pengaturan.html">Pengaturan</a>
+            <a href="login.html" style="color: var(--red); font-weight: 700;">Logout</a>
+        </nav>
+    </div>
+    <header>
+        <h1>Data Pengguna - Admin SILAPU Kopma UIN RIL</h1>
+    </header>
+    <main class="main-content">
+        <div class="main-content-inner">
+            <h2>Jumlah Pengguna: <span id="user-count">0</span></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Pengguna</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table-body">
+                    <!-- Sample user data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <script>
+        // Sample user data
+        const users = [
+            {id: 1, name: "Budi", email: "budi@example.com", role: "User"},
+            {id: 2, name: "Sari", email: "sari@example.com", role: "User"},
+            {id: 3, name: "Andi", email: "andi@example.com", role: "Admin"},
+        ];
+
+        const userCountSpan = document.getElementById('user-count');
+        const userTableBody = document.getElementById('user-table-body');
+
+        function renderUsers() {
+            userTableBody.innerHTML = '';
+            users.forEach(user => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role}</td>
+                `;
+                userTableBody.appendChild(tr);
+            });
+            userCountSpan.textContent = users.length;
+        }
+
+        renderUsers();
+    </script>
+</body>
+</html>

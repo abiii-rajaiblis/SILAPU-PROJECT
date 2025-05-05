@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Laporan Statistik - Admin SILAPU Kopma UIN RIL</title>
+    <style>
+        :root {
+            --light-green: #8CD790;
+            --dark-green: #5CAB7D;
+            --red: #E74C3C;
+            --yellow: #F1C40F;
+            --white: #FFFFFF;
+            --dark: #333333;
+            --light-gray: #F5F5F5;
+            --sidebar-width: 250px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--dark);
+        }
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--dark-green);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+        }
+        .sidebar h2 {
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        .sidebar nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 15px;
+            display: block;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            background-color: var(--yellow);
+            color: var(--dark-green);
+        }
+        /* Main content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            flex-grow: 1;
+            background-color: var(--white);
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        header {
+            background-color: var(--light-green);
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: var(--sidebar-width);
+            right: 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            z-index: 100;
+        }
+        header h1 {
+            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .main-content-inner {
+            padding-top: 80px;
+        }
+        .chart-container {
+            margin-top: 30px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2.section-title {
+            margin-bottom: 15px;
+            color: var(--dark-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <nav>
+            <a href="admin-dashboard.html">Dashboard Utama</a>
+            <a href="kelola-usaha.html">Kelola Usaha</a>
+            <a href="pemesanan.html">Pemesanan</a>
+            <a href="pengguna.html">Pengguna</a>
+            <a href="laporan.html" class="active">Laporan</a>
+            <a href="pengaturan.html">Pengaturan</a>
+            <a href="logout.php" style="color: var(--red); font-weight: 700;">Logout</a>
+        </nav>
+    </div>
+    <header>
+        <h1>Laporan Statistik - Admin SILAPU Kopma UIN RIL</h1>
+    </header>
+    <main class="main-content">
+        <div class="main-content-inner">
+            <div class="chart-container">
+                <h2 class="section-title">Statistik Anggota</h2>
+                <canvas id="memberChart" width="400" height="200"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2 class="section-title">Statistik Penjualan</h2>
+                <canvas id="salesChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const memberCtx = document.getElementById('memberChart').getContext('2d');
+        const salesCtx = document.getElementById('salesChart').getContext('2d');
+
+        // Sample data for member statistics (monthly new members)
+        const memberData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Jumlah Anggota Baru',
+                data: [5, 8, 6, 10, 12, 15, 14, 18, 20, 22, 25, 30],
+                fill: false,
+                borderColor: 'rgba(92, 171, 125, 1)',
+                backgroundColor: 'rgba(92, 171, 125, 0.5)',
+                tension: 0.3
+            }]
+        };
+
+        // Sample data for sales statistics (monthly sales)
+        const salesData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Penjualan (dalam juta)',
+                data: [10, 12, 15, 18, 20, 22, 25, 28, 30, 35, 40, 45],
+                fill: true,
+                backgroundColor: 'rgba(140, 215, 144, 0.5)',
+                borderColor: 'rgba(140, 215, 144, 1)',
+                tension: 0.3
+            }]
+        };
+
+        const memberChart = new Chart(memberCtx, {
+            type: 'line',
+            data: memberData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Pertumbuhan Anggota per Bulan'
+                    }
+                }
+            }
+        });
+
+        const salesChart = new Chart(salesCtx, {
+            type: 'bar',
+            data: salesData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Penjualan per Bulan (dalam juta)'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

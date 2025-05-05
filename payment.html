@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pembayaran - SILAPU Kopma UIN RIL</title>
+    <style>
+        :root {
+            --light-green: #8CD790;
+            --dark-green: #5CAB7D;
+            --red: #E74C3C;
+            --yellow: #F1C40F;
+            --white: #FFFFFF;
+            --dark: #333333;
+            --light-gray: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--light-green);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img { 
+            height: 50px;
+            width: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .logo h1 {
+            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--white);
+            background-color: var(--dark-green);
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background-color: var(--light-green);
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--red);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        main.content {
+            margin-top: 40px;
+            padding: 40px 20px;
+            background-color: var(--white);
+            border-radius: 12px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 100%;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--dark-green);
+            outline: none;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .btn-submit {
+            background-color: var(--red);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            padding: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            main.content {
+                margin: 20px;
+                max-width: 100%;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="./logokopma.jpg" alt="Logo Kopma">
+                    <h1>SILAPU Kopma UIN RIL</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html#beranda">Beranda</a>
+                    <a href="index.html#layanan">Layanan</a>
+                    <a href="index.html#tentang">Tentang Kami</a>
+                    <a href="index.html#berita">Berita</a>
+                    <a href="index.html#kontak">Kontak</a>
+                    <a href="kemitraan-usaha.html" class="active">Kemitraan Usaha</a>
+                    <a href="#login" class="btn" style="background-color: var(--yellow); color: var(--dark);">Login</a>
+                </div>
+                <button class="hamburger">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content">
+        <h2>Form Pembayaran</h2>
+        <form id="payment-form" action="#" method="POST">
+            <label for="payment-method">Pilih Metode Pembayaran</label>
+            <select id="payment-method" name="payment_method" required>
+                <option value="" disabled selected>Pilih metode pembayaran</option>
+                <option value="transfer_bank">Transfer Bank</option>
+                <option value="e_wallet">E-Wallet</option>
+                <option value="cod">Cash on Delivery (COD)</option>
+            </select>
+
+            <label for="recipient-name">Nama Penerima</label>
+            <input type="text" id="recipient-name" name="recipient_name" placeholder="Masukkan nama penerima" required />
+
+            <label for="address">Alamat Pengiriman</label>
+            <textarea id="address" name="address" placeholder="Masukkan alamat pengiriman" required></textarea>
+    
+            <label for="phone">Nomor Telepon</label>
+            <input type="text" id="phone" name="phone" placeholder="Masukkan nomor telepon" required />
+
+            <button type="submit" class="btn-submit">Konfirmasi Pembayaran</button>
+        </form>
+    </main>
+    <script>
+        const paymentForm = document.getElementById('payment-form');
+        paymentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const paymentMethod = document.getElementById('payment-method').value;
+            if (paymentMethod === 'e_wallet') {
+                // Redirect to e-wallet payment page with QR code and order details
+                window.location.href = 'ewallet-payment.html';
+            } else {
+                alert('Pembayaran berhasil dikonfirmasi. Toko/penjual telah menerima notifikasi pesanan.');
+                paymentForm.reset();
+                // Optionally redirect or update UI here
+            }
+        });
+    </script>
+</body>
+</html>

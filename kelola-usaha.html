@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kelola Usaha - Admin SILAPU Kopma UIN RIL</title>
+    <style>
+        :root {
+            --light-green: #8CD790;
+            --dark-green: #5CAB7D;
+            --red: #E74C3C;
+            --yellow: #F1C40F;
+            --white: #FFFFFF;
+            --dark: #333333;
+            --light-gray: #F5F5F5;
+            --sidebar-width: 250px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--light-gray);
+            color: var(--dark);
+        }
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--dark-green);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+        }
+        .sidebar h2 {
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        .sidebar nav a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 15px;
+            display: block;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            background-color: var(--yellow);
+            color: var(--dark-green);
+        }
+        /* Main content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            flex-grow: 1;
+            background-color: var(--white);
+            min-height: 100vh;
+        }
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--dark-green);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--light-green);
+            color: var(--dark);
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .btn-approve, .btn-reject {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--white);
+        }
+        .btn-approve {
+            background-color: var(--dark-green);
+            margin-right: 5px;
+        }
+        .btn-approve:hover {
+            background-color: #4a7a5a;
+        }
+        .btn-reject {
+            background-color: var(--red);
+        }
+        .btn-reject:hover {
+            background-color: #b0302a;
+        }
+        /* Header */
+        header {
+            background-color: var(--light-green);
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: var(--sidebar-width);
+            right: 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            z-index: 100;
+        }
+        header h1 {
+            color: var(--dark);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        /* Content padding to avoid header overlap */
+        .main-content-inner {
+            padding-top: 80px;
+        }
+        /* Access denied message */
+        .access-denied {
+            margin: auto;
+            font-size: 1.5rem;
+            color: var(--red);
+            text-align: center;
+            padding: 50px;
+        }
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                overflow-x: auto;
+            }
+            .sidebar h2 {
+                display: none;
+            }
+            .sidebar nav a {
+                flex: 1;
+                margin: 0 5px;
+                text-align: center;
+                padding: 10px 5px;
+            }
+            header {
+                left: 0;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <nav>
+            <a href="admin-dashboard.html">Dashboard Utama</a>
+            <a href="kelola-usaha.html" class="active">Kelola Usaha</a>
+            <a href="pemesanan.html">Pemesanan</a>
+            <a href="pengguna.html">Pengguna</a>
+            <a href="laporan.html">Laporan</a>
+            <a href="pengaturan.html">Pengaturan</a>
+            <a href="login.html" style="color: var(--red); font-weight: 700;">Logout</a>
+        </nav>
+    </div>
+    <header>
+        <h1>Kelola Usaha - Admin SILAPU Kopma UIN RIL</h1>
+    </header>
+    <main class="main-content">
+        <div class="main-content-inner">
+            <div id="access-denied" class="access-denied" style="display:none;">
+                Anda tidak memiliki akses ke halaman ini. Hanya admin yang dapat melihat halaman ini.
+            </div>
+            <section id="manage-business-section">
+                <h2 class="section-title">Permohonan Usaha Anggota</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama Lengkap</th>
+                            <th>NIM</th>
+                            <th>Nama Usaha</th>
+                            <th>Foto Produk</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applications-table-body">
+                        <!-- Business applications will be listed here -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+    <script>
+        // Simulate admin access control
+        const isAdmin = true; // Change to false to simulate non-admin access
+
+        const accessDeniedMessage = document.getElementById('access-denied');
+        const mainContentInner = document.querySelector('.main-content-inner');
+
+        if (!isAdmin) {
+            accessDeniedMessage.style.display = 'block';
+            mainContentInner.style.display = 'none';
+        } else {
+            accessDeniedMessage.style.display = 'none';
+            mainContentInner.style.display = 'block';
+        }
+
+        // Sample data for business applications
+        const applications = [
+            {
+                fullName: 'Ahmad Fauzi',
+                nim: '123456789',
+                businessName: 'Toko Sembako Fauzi',
+                productPhoto: 'https://via.placeholder.com/100',
+                status: 'Pending'
+            },
+            {
+                fullName: 'Siti Aminah',
+                nim: '987654321',
+                businessName: 'Kue Basah Aminah',
+                productPhoto: 'https://via.placeholder.com/100',
+                status: 'Pending'
+            }
+        ];
+
+        const tableBody = document.getElementById('applications-table-body');
+
+        function renderApplications() {
+            tableBody.innerHTML = '';
+            applications.forEach((app, index) => {
+                const tr = document.createElement('tr');
+
+                tr.innerHTML = `
+                    <td>${app.fullName}</td>
+                    <td>${app.nim}</td>
+                    <td>${app.businessName}</td>
+                    <td><img src="${app.productPhoto}" alt="Foto Produk" width="100" /></td>
+                    <td id="status-${index}">${app.status}</td>
+                    <td>
+                        <button class="btn-approve" onclick="approveApplication(${index})" ${app.status !== 'Pending' ? 'disabled' : ''}>Setujui</button>
+                        <button class="btn-reject" onclick="rejectApplication(${index})" ${app.status !== 'Pending' ? 'disabled' : ''}>Tolak</button>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function approveApplication(index) {
+            if (confirm('Apakah Anda yakin ingin menyetujui permohonan ini?')) {
+                applications[index].status = 'Disetujui';
+                renderApplications();
+            }
+        }
+
+        function rejectApplication(index) {
+            if (confirm('Apakah Anda yakin ingin menolak permohonan ini?')) {
+                applications[index].status = 'Ditolak';
+                renderApplications();
+            }
+        }
+
+        renderApplications();
+    </script>
+</body>
+</html>
